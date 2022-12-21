@@ -37,7 +37,7 @@ const companyArr = ref([])
     width: 8px;
     height: 8px;
     position: absolute;
-    top: -3px;
+    top: -4px;
     left: 1px;
 }
 </style>
