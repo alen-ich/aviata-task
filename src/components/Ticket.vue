@@ -34,12 +34,15 @@ const findAirline = (code: string) => {
                     </div>
                 </div>
             </div>
-            <div class="flex">
-                <div class="flex">
-                    <div>Детали перелета</div>
-                    <div>Условия тарифа</div>
+            <div class="flex gap-x-11">
+                <div class="flex gap-x-3 items-center">
+                    <div class="text-blue text-xs border-dashed border-blue border-b-[1px] w-fit cursor-pointer">Детали перелета</div>
+                    <div class="text-blue text-xs border-dashed border-blue border-b-[1px] w-fit cursor-pointer">Условия тарифа</div>
                 </div>
-                <div>невозвратный</div>
+                <div v-if="!ticketData.refundable" class="flex gap-x-2 items-center text-dark text-xs">
+                    <img src="../assets/non-ref.svg" alt="" width="16" height="16">
+                    невозвратный
+                </div>
             </div>
         </div>
         <div class="flex flex-col items-center pt-3 px-5 pb-[15px] bg-beige rounded-r">
