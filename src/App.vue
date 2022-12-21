@@ -25,7 +25,7 @@ const readJSON = () => {
   <div class="flex gap-x-5">
     <div class="flex flex-col"></div>
     <TicketList msg="Vite + Vue" />
-    <CompanyFilter />
+    <CompanyFilter :airlines="dataAirlines"/>
   </div>
 </template>
 

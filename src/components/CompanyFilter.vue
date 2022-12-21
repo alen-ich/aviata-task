@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import { onBeforeMount, onMounted, ref } from 'vue'
+
+const airlineFilter = ref([] as any)
+
+defineProps<{ airlines: any }>()
+
 </script>
 
 <template>
@@ -16,22 +21,25 @@ import { onBeforeMount, onMounted, ref } from 'vue'
 
         </div>
         <div class="flex flex-col overflow-auto">
-            <label class="flex gap-x-3 items-center cursor-pointer custom-label text-deep-dark text-xs">
+            <label class="flex gap-x-3 items-center cursor-pointer custom-label text-deep-dark text-xs h-8"
+                v-for="(airline, code) in airlines">
                 <span
-                    class="w-3 h-3 bg-white rounded-sm border-[1px] border-solid border-grey relative checkbox-custom"></span>
-                <input type="checkbox" class="hidden">
-                Air Astana
+                    class="w-3 h-3 bg-white rounded-sm border-[1px] border-solid border-grey relative checkbox-custom"
+                    :class="{'bg-bright-green border-bright-green checkbox-custom-checked' : airlineFilter.includes(code)}"></span>
+                <input type="checkbox" class="hidden" v-model="airlineFilter" :value="code">
+                {{ airline }}
             </label>
         </div>
     </div>
 </template>
 
 <style scoped>
+
 #close-filter:hover .close-filter-icon {
     fill: #7284e4;
 }
 
-.custom-label:hover .checkbox-custom::before {
+.custom-label:hover .checkbox-custom::before  {
     content: url("../assets/mark-icon.svg");
     width: 8px;
     height: 8px;
@@ -39,4 +47,23 @@ import { onBeforeMount, onMounted, ref } from 'vue'
     top: -4px;
     left: 1px;
 }
+
+.checkbox-custom-checked::before {
+    content: url("../assets/mark-white.svg");
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    top: -4px;
+    left: 1px;
+}
+
+.custom-label:hover .checkbox-custom-checked::before {
+    content: url("../assets/mark-white.svg");
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    top: -4px;
+    left: 1px;
+}
+
 </style>
