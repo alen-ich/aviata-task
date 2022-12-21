@@ -24,7 +24,7 @@ const resetFilters = () => {
 </script>
 
 <template>
-    <div class="flex flex-col bg-beige text-deep-dark pt-3 px-3 pb-4 gap-y-4 w-60 h-80 rounded">
+    <div class="flex flex-col bg-beige text-deep-dark pt-3 px-3 pb-4 gap-y-4 w-60 h-[152px] rounded">
         <div class="flex justify-between items-center">
             <h4 class="text-sm font-bold">Опции тарифа</h4>
             <button type="button" id="close-filter" @click="resetFilters">

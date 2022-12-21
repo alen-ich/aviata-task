@@ -24,10 +24,11 @@ const readJSON = () => {
 
 <template>
   <div class="flex gap-x-5">
-    <div class="flex flex-col"></div>
+    <div class="flex flex-col gap-y-3">
+      <OptionsFilter />
+      <CompanyFilter :airlines="dataAirlines" />
+    </div>
     <TicketList msg="Vite + Vue" />
-    <CompanyFilter :airlines="dataAirlines"/>
-    <OptionsFilter />
   </div>
 </template>
 
