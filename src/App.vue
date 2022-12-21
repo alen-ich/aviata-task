@@ -6,14 +6,17 @@ import CompanyFilter from './components/CompanyFilter.vue'
 onMounted(() => {
   readJSON()
 })
-const companyArr = ref()
+const dataAirlines = ref()
+const dataFlights = ref()
 
 const readJSON = () => {
   fetch("../../results.json")
     .then((response) =>
       response.json()
-    ).then((data) =>
-      companyArr.value = data
+    ).then((data) => {
+      dataAirlines.value = data.airlines
+      dataFlights.value = data.flights
+    }
     )
 }
 </script>
