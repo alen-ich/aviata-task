@@ -28,6 +28,8 @@ const readJSON = () => {
       <div class="flex flex-col gap-y-3 sticky top-3">
         <OptionsFilter />
         <CompanyFilter :airlines="dataAirlines" />
+        <button class="text-blue text-xs border-dashed border-blue border-b-[1px] w-fit cursor-pointer">Сбросить все
+          фильтры</button>
       </div>
     </div>
     <TicketList :tickets="dataFlights" />
