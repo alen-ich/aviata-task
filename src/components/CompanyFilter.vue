@@ -38,7 +38,7 @@ watch(airlineFilter, () => {
             </button>
 
         </div>
-        <div class="flex flex-col overflow-y-scroll h-full gap-y-5">
+        <div class="flex flex-col overflow-y-scroll h-full gap-y-5 airline-list">
             <label class="flex gap-x-3 items-center cursor-pointer custom-label text-deep-dark text-xs"
                 v-for="(airline, code) in airlines">
                 <span class="w-3 h-3 bg-white rounded-sm border-[1px] border-solid border-grey relative checkbox-custom"
@@ -81,4 +81,12 @@ watch(airlineFilter, () => {
     top: -9px;
     left: 1px;
 }
+
+.airline-list::-webkit-scrollbar {
+  width: 2px;
+}
+
+.airline-list::-webkit-scrollbar-thumb {
+  background: #e1e1e1;
+} 
 </style>
