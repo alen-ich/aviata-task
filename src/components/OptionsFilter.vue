@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 const optionsArr = ref([
     {
@@ -21,6 +21,14 @@ const optionsFilter = ref([] as any)
 const resetFilters = () => {
     optionsFilter.value = []
 }
+
+const props = defineProps<{filtersResetStatus: boolean}>()
+
+watch(() => props.filtersResetStatus, ()=>{
+    if(props.filtersResetStatus){
+        optionsFilter.value = []
+    }
+})
 </script>
 
 <template>

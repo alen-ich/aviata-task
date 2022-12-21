@@ -20,19 +20,29 @@ const readJSON = () => {
     }
     )
 }
+
+const filtersResetStatus = ref(false)
+
+const resetAllFilters = () => {
+  filtersResetStatus.value = true
+  setTimeout(() => {
+    filtersResetStatus.value = false
+  }, 500)
+}
 </script>
 
 <template>
   <div class="flex gap-x-5 relative">
     <div>
       <div class="flex flex-col gap-y-3 sticky top-3">
-        <OptionsFilter />
-        <CompanyFilter :airlines="dataAirlines" />
-        <button class="text-blue text-xs border-dashed border-blue border-b-[1px] w-fit cursor-pointer">Сбросить все
+        <OptionsFilter :filters-reset-status="filtersResetStatus" />
+        <CompanyFilter :airlines="dataAirlines" :filters-reset-status="filtersResetStatus" />
+        <button type="button" class="text-blue text-xs border-dashed border-blue border-b-[1px] w-fit cursor-pointer"
+          @click="resetAllFilters">Сбросить все
           фильтры</button>
       </div>
     </div>
-    <TicketList :tickets="dataFlights" :airlines="dataAirlines"/>
+    <TicketList :tickets="dataFlights" :airlines="dataAirlines" />
   </div>
 </template>
 

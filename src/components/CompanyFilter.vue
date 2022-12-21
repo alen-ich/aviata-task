@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref,watch } from 'vue'
 
 const airlineFilter = ref([] as any)
 
@@ -7,7 +7,13 @@ const resetFilters = () => {
     airlineFilter.value = []
 }
 
-defineProps<{ airlines: any }>()
+const props = defineProps<{ airlines: any, filtersResetStatus: boolean }>()
+
+watch(() => props.filtersResetStatus, ()=>{
+    if(props.filtersResetStatus){
+        airlineFilter.value = []
+    }
+})
 
 </script>
 
