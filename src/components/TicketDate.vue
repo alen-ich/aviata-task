@@ -6,8 +6,12 @@ const props = defineProps<{ date: any, dateDiff?: number }>()
 onMounted(() => {
     const dateValue = new Date(props.date)
     dateData.value = dateValue.getDate() + " " + monthNames[dateValue.getMonth()] + ", " + dayNames[dateValue.getDay()]
-    timeData.value = props.date.split(" ")[1]
+    timeData.value = adjustTime()
 })
+
+const adjustTime = () => {
+    return props.date.split(" ")[1].length === 4 ? ("0" + props.date.split(" ")[1]) : props.date.split(" ")[1]
+}
 
 const dateData = ref()
 const timeData = ref()
