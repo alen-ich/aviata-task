@@ -23,10 +23,18 @@
 }
 
 body {
+  display: flex;
+  justify-content: center;
   margin: 0;
   padding-top: 50px;
-  padding-left: 149px;
-  padding-right: 149px;
   padding-bottom: 27px;
   background-color: #d7d7d7;
+}
+
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e1e1e1;
 }

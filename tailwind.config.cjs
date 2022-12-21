@@ -5,13 +5,13 @@ module.exports = {
     extend: {
       colors: {
         "deep-dark": "#202123",
-        "bright-green": "#55BB06",
+        "bright-green": "#55bb06",
         "dark": "#707276",
-        "light-blue": "#EAF0FA",
-        "deep-blue": "#5763B3",
-        "beige": "#F5F5F5",
+        "light-blue": "#eaf0fa",
+        "deep-blue": "#5763b3",
+        "beige": "#f5f5f5",
         "grey": "#b9b9b9",
-        "blue": "#7284E4"
+        "blue": "#7284e4",
       },
     },
   },
