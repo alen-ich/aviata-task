@@ -24,7 +24,7 @@ defineProps<{ airlines: any }>()
             </button>
 
         </div>
-        <div class="flex flex-col overflow-scroll h-full gap-y-5">
+        <div class="flex flex-col overflow-y-scroll h-full gap-y-5">
             <label class="flex gap-x-3 items-center cursor-pointer custom-label text-deep-dark text-xs"
                 v-for="(airline, code) in airlines">
                 <span

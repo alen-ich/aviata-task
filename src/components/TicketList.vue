@@ -2,14 +2,14 @@
 import { ref } from 'vue'
 import Ticket from './Ticket.vue'
 
-defineProps<{ msg: string }>()
+defineProps<{ tickets: any }>()
 
 const count = ref(0)
 </script>
 
 <template>
-  <div class="flex flex-col">
-    <Ticket />
+  <div class="flex flex-col gap-y-3">
+    <Ticket v-for="ticket in tickets"/>
   </div>
 </template>
 

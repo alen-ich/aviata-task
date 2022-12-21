@@ -28,7 +28,7 @@ const readJSON = () => {
       <OptionsFilter />
       <CompanyFilter :airlines="dataAirlines" />
     </div>
-    <TicketList msg="Vite + Vue" />
+    <TicketList :tickets="dataFlights" />
   </div>
 </template>
 
