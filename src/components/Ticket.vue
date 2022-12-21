@@ -10,14 +10,26 @@ const airlineLogo = computed(() => {
 
 const flightOrigin = computed(() => props.ticketData.itineraries[0][0].segments[0].origin_code)
 const flightDest = computed(() => props.ticketData.itineraries[0][0].segments.at(-1).dest_code)
-const flightDurHour = computed(() => Math.floor(props.ticketData.itineraries[0][0].traveltime / 3600))
-const flightDurMinute = computed(() => (props.ticketData.itineraries[0][0].traveltime - flightDurHour.value * 3600) / 60)
+
+const flightDurHour = computed(() => getDurHour(props.ticketData.itineraries[0][0].traveltime))
+const flightDurMinute = computed(() => getDurMinute(props.ticketData.itineraries[0][0].traveltime))
+
 const depDate = props.ticketData.itineraries[0][0].dep_date
 const arrDate = props.ticketData.itineraries[0][0].arr_date
 const dateDiff = computed(() => {
     const depDateValue = new Date(depDate)
     const arrDateValue = new Date(arrDate)
     return (arrDateValue.getDate() - depDateValue.getDate())
+})
+
+const getDurHour = (seconds: number) => Math.floor(seconds / 3600)
+const getDurMinute = (seconds: number) => (seconds - Math.floor(seconds / 3600) * 3600) / 60
+
+const flightLayovers = computed(() => props.ticketData.itineraries[0][0].layovers.slice(0, -1))
+
+const flightTransits = computed(() => {
+    console.log(flightLayovers.value.length)
+    return props.ticketData.itineraries[0][0].segments.slice(0, flightLayovers.value.length)
 })
 </script>
 
@@ -57,8 +69,10 @@ const dateDiff = computed(() => {
                                 </div>
                             </div>
                             <div v-if="ticketData.itineraries[0][0].stops > 0"
-                                class="flex justify-center text-orange-yellow text-xs">
-                                через Шымкент, 1 ч 50 м
+                                class="flex flex-col justify-center text-orange-yellow">
+                                <div v-for="(layover, layoverIdx) in flightLayovers" class="text-xs">
+                                    через {{ flightTransits[layoverIdx].dest }}, {{ getDurHour(layover) }} ч {{ getDurMinute(layover) }} м
+                                </div>
                             </div>
                         </div>
                         <TicketDate :date="arrDate" :date-diff="dateDiff" />
