@@ -34,21 +34,26 @@ const resetAllFilters = () => {
 }
 
 const filterTickets = (filters: Array<any>) => {
-  console.log(filters)
-  if (filters.length) {
-    let result = [] as any
-    if (filters.includes('direct')) {
-      result = result.concat(dataFlights.value.filter((e: any) => {
-        return !e.itineraries[0][0].layovers.length
-      }))
+  let result = dataFlights.value
+  if (filters.includes('direct')) {
+    result = filterByDirect(result)
+  }
+  if (filters.includes('baggage')) {
+    result = filterByBaggage(result)
+  }
+  if (filters.includes('refund')) {
+    result = filterByRefundable(result)
+  } if (dataAirlines.value.hasOwnProperty(filters[0])) {
+    let resultByAirlines = [] as Array<any>
+      console.log(filters)
+    for (let i = 0; i < filters.length; i++) {
+      let test = filterByAirline(result, filters[i])
+      resultByAirlines.concat(test)
+      console.log(test)
     }
-    if (filters.includes('baggage')) {
-      result = result.concat(dataFlights.value.filter((e: any) => {
-        return !e.services.hasOwnProperty('0PC')
-      }))
-    }
-    dataFlights.value = result
-  } else readJSON()
+  }
+  displayFlights.value = result
+
 }
 
 const filterByDirect = (flights: Array<any>) => {
@@ -64,7 +69,7 @@ const filterByRefundable = (flights: Array<any>) => {
 }
 
 const filterByAirline = (flights: Array<any>, airline: string) => {
-  return flights.filter((e:any) => e.validating_carrier === airline)
+  return flights.filter((e: any) => e.validating_carrier === airline)
 }
 </script>
 
@@ -73,7 +78,8 @@ const filterByAirline = (flights: Array<any>, airline: string) => {
     <div>
       <div class="flex flex-col gap-y-3 sticky top-3">
         <OptionsFilter :filters-reset-status="filtersResetStatus" @filter-by-option="filterTickets" />
-        <CompanyFilter :airlines="dataAirlines" :filters-reset-status="filtersResetStatus" @filter-by-airline="filterTickets" />
+        <CompanyFilter :airlines="dataAirlines" :filters-reset-status="filtersResetStatus"
+          @filter-by-airline="filterTickets" />
         <button type="button" class="text-blue text-xs border-dashed border-blue border-b-[1px] w-fit cursor-pointer"
           @click="resetAllFilters">Сбросить все
           фильтры</button>

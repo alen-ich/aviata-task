@@ -1,16 +1,15 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, computed} from 'vue';
 import TicketDate from './TicketDate.vue'
 
 const props = defineProps<{ ticketData: any, airlines: any }>()
 
-onMounted(()=>{
-    airlineName.value = findAirline(props.ticketData.validating_carrier)
-    airlineLogo.value = `https://aviata.kz/static/airline-logos/80x80/${props.ticketData.validating_carrier}.png`
+const airlineName = computed(()=>{
+    return findAirline(props.ticketData.validating_carrier)
 })
-
-const airlineName = ref()
-const airlineLogo = ref()
+const airlineLogo = computed(()=>{
+    return `https://aviata.kz/static/airline-logos/80x80/${props.ticketData.validating_carrier}.png`
+})
 
 const findAirline = (code: string) => {
     return props.airlines[code]
