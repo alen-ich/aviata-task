@@ -1,6 +1,21 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
 import TicketList from './components/TicketList.vue'
 import CompanyFilter from './components/CompanyFilter.vue'
+
+onMounted(() => {
+  readJSON()
+})
+const companyArr = ref()
+
+const readJSON = () => {
+  fetch("../../results.json")
+    .then((response) =>
+      response.json()
+    ).then((data) =>
+      companyArr.value = data
+    )
+}
 </script>
 
 <template>
@@ -17,9 +32,11 @@ import CompanyFilter from './components/CompanyFilter.vue'
   padding: 1.5em;
   will-change: filter;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
 }

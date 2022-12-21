@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-
-const companyArr = ref([])
+import { onBeforeMount, onMounted, ref } from 'vue'
 </script>
 
 <template>
@@ -19,7 +17,8 @@ const companyArr = ref([])
         </div>
         <div class="flex flex-col overflow-auto">
             <label class="flex gap-x-3 items-center cursor-pointer custom-label text-deep-dark text-xs">
-                <span class="w-3 h-3 bg-white rounded-sm border-[1px] border-solid border-grey relative checkbox-custom"></span>
+                <span
+                    class="w-3 h-3 bg-white rounded-sm border-[1px] border-solid border-grey relative checkbox-custom"></span>
                 <input type="checkbox" class="hidden">
                 Air Astana
             </label>
