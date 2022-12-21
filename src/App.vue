@@ -74,9 +74,9 @@ const filterByAirline = (flights: Array<any>, airline: string) => {
 </script>
 
 <template>
-  <div class="flex gap-x-5 relative">
+  <div class="flex flex-col xl:flex-row gap-x-5 relative">
     <div>
-      <div class="flex flex-col gap-y-3 sticky top-3">
+      <div class="flex flex-col gap-y-3 sticky top-3 mb-5">
         <OptionsFilter :filters-reset-status="filtersResetStatus" @filter-by-option="filterTickets" />
         <CompanyFilter :airlines="dataAirlines" :filters-reset-status="filtersResetStatus"
           @filter-by-airline="filterTickets" />

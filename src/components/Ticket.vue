@@ -31,20 +31,20 @@ const flightTransits = computed(() => props.ticketData.itineraries[0][0].segment
 </script>
 
 <template>
-    <div class="flex justify-between rounded shadow-[0_2px_4px_rgba(0,0,0,0.15)] bg-white w-[880px]">
-        <div class="flex flex-col gap-y-[46px] pt-10 pb-4 pl-11">
+    <div class="flex flex-col xl:flex-row justify-between rounded shadow-[0_2px_4px_rgba(0,0,0,0.15)] bg-white w-full">
+        <div class="flex flex-col gap-y-[46px] pt-3 xl:pt-10 pb-4 px-5 xl:pl-11 xl:pr-0">
             <div>
-                <div class="flex items-center">
+                <div class="flex flex-col xl:flex-row items-center">
                     <div class="flex gap-x-3 items-center">
                         <img :src="airlineLogo" alt="" width="16" height="20">
                         <div class="text-deep-dark font-semibold text-sm w-[100px]">
                             {{ ticketData.itineraries[0][0].carrier_name }}
                         </div>
                     </div>
-                    <div class="flex gap-x-8 relative">
+                    <div class="flex flex-col xl:flex-row xl:gap-x-8 relative">
                         <TicketDate :date="depDate" />
-                        <div class="flex flex-col items-center">
-                            <div class="flex gap-x-11 mb-[6px]">
+                        <div class="flex flex-col items-center order-last xl:order-2">
+                            <div class="flex gap-x-11 mb-5 xl:mb-[6px]">
                                 <div class="flex text-grey text-[10px] leading-3">{{
                                         flightOrigin
                                 }}</div>
@@ -53,7 +53,7 @@ const flightTransits = computed(() => props.ticketData.itineraries[0][0].segment
                                         flightDest
                                 }}</div>
                             </div>
-                            <div class="relative flex justify-between w-full mb-1">
+                            <div class="relative flex justify-between w-full mb-5 xl:mb-1">
                                 <div class="w-full h-[1px] bg-grey absolute top-[2px] z-0"></div>
                                 <div
                                     class="w-[5px] h-[5px] border-[1px] border-solid border-grey rounded-full bg-white z-10">
@@ -76,7 +76,7 @@ const flightTransits = computed(() => props.ticketData.itineraries[0][0].segment
                     </div>
                 </div>
             </div>
-            <div class="flex gap-x-11">
+            <div class="gap-x-11 hidden xl:flex">
                 <div class="flex gap-x-3 items-center">
                     <div class="text-blue text-xs border-dashed border-blue border-b-[1px] w-fit cursor-pointer">Детали
                         перелета</div>
@@ -94,10 +94,10 @@ const flightTransits = computed(() => props.ticketData.itineraries[0][0].segment
             </div>
             <button type="button"
                 class="rounded bg-bright-green w-[200px] h-10 text-white font-bold text-lg leading-[25px] flex justify-center items-center mb-2">Выбрать</button>
-            <div class="text-dark flex justify-center items-center text-xs mb-3">
+            <div class="text-dark flex justify-center items-center text-xs xl:mb-3">
                 Цена за всех пассажиров
             </div>
-            <div class="flex w-full items-center gap-x-3 justify-center">
+            <div class="hidden xl:flex w-full items-center gap-x-3 justify-center">
                 <div v-if="ticketData.services.hasOwnProperty('0PC')"
                     class="text-deep-dark text-xs w-[66px] text-center">Нет багажа</div>
                 <div v-else-if="ticketData.services.hasOwnProperty('20KG')"

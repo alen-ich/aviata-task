@@ -8,7 +8,7 @@ const count = ref(0)
 </script>
 
 <template>
-  <div class="flex flex-col gap-y-3">
+  <div class="flex flex-col gap-y-3 w-72 xl:w-[880px]">
     <Ticket v-for="ticket in tickets" :ticket-data="ticket" :id="ticket.id" :airlines="airlines"/>
   </div>
 </template>

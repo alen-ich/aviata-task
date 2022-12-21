@@ -26,7 +26,7 @@ watch(airlineFilter, () => {
 </script>
 
 <template>
-    <div class="flex flex-col bg-beige text-deep-dark pt-3 pr-1 pb-4 gap-y-5 w-60 h-80 rounded">
+    <div class="flex flex-col bg-beige text-deep-dark pt-3 pr-1 pb-4 gap-y-5 w-72 xl:w-60 h-80 rounded">
         <div class="flex justify-between items-center pl-3 pr-2">
             <h4 class="text-sm font-bold">Авиакомпании</h4>
             <button type="button" id="close-filter" @click="resetFilters" class="tooltip">

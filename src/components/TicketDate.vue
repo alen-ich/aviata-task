@@ -22,13 +22,13 @@ const dayNames = ["пн", "вт", "ср", "чт", "пт", "сб", "вс"]
 </script>
 
 <template>
-    <div class="flex items-start">
+    <span class="flex items-start">
         <div class="flex flex-col items-center text-deep-dark">
             <div class="text-xs">{{ dateData }}</div>
             <div class="text-2xl font-semibold">{{ timeData }}</div>
         </div>
         <div v-if="dateDiff" class="text-bright-red text-[10px] leading-[14px] font-semibold h-4 mt-[2px] ml-[-2px]">+{{ dateDiff }}</div>
-    </div>
+    </span>
 </template>
 
 <style scoped>

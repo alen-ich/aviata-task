@@ -40,7 +40,7 @@ watch(optionsFilter, () => {
 </script>
 
 <template>
-    <div class="flex flex-col bg-beige text-deep-dark pt-3 pb-4 pr-1 gap-y-5 w-60 rounded">
+    <div class="flex flex-col bg-beige text-deep-dark pt-3 pb-4 pr-1 gap-y-5 w-72 xl:w-60 rounded">
         <div class="flex justify-between items-center pl-3 pr-2">
             <h4 class="text-sm font-bold">Опции тарифа</h4>
             <button type="button" id="close-filter" @click="resetFilters" class="tooltip">
