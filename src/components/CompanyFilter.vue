@@ -48,7 +48,7 @@ defineProps<{ airlines: any }>()
     width: 8px;
     height: 8px;
     position: absolute;
-    top: -4px;
+    top: -8px;
     left: 1px;
 }
 
@@ -57,7 +57,7 @@ defineProps<{ airlines: any }>()
     width: 8px;
     height: 8px;
     position: absolute;
-    top: -4px;
+    top: -8px;
     left: 1px;
 }
 
@@ -66,7 +66,7 @@ defineProps<{ airlines: any }>()
     width: 8px;
     height: 8px;
     position: absolute;
-    top: -4px;
+    top: -8px;
     left: 1px;
 }
 
