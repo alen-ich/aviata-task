@@ -27,7 +27,7 @@ const dayNames = ["пн", "вт", "ср", "чт", "пт", "сб", "вс"]
             <div class="text-xs">{{ dateData }}</div>
             <div class="text-2xl font-semibold">{{ timeData }}</div>
         </div>
-        <div v-if="dateDiff" class="text-bright-red text-[10px] leading-[14px] font-semibold h-4 mt-[2px] ml-[1px]">+{{ dateDiff }}</div>
+        <div v-if="dateDiff" class="text-bright-red text-[10px] leading-[14px] font-semibold h-4 mt-[2px] ml-[-2px]">+{{ dateDiff }}</div>
     </div>
 </template>
 
