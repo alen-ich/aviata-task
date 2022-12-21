@@ -29,8 +29,8 @@ const findAirline = (code: string) => {
                         </div>
                     </div>
                     <div class="flex gap-x-8">
-                        <TicketDate />
-                        <TicketDate />
+                        <TicketDate :date="ticketData.itineraries[0]['0'].dep_date"/>
+                        <TicketDate :date="ticketData.itineraries[0]['0'].arr_date"/>
                     </div>
                 </div>
             </div>
