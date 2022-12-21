@@ -26,8 +26,8 @@ watch(airlineFilter, () => {
 </script>
 
 <template>
-    <div class="flex flex-col bg-beige text-deep-dark pt-3 px-3 pb-4 gap-y-5 w-60 h-80 rounded">
-        <div class="flex justify-between items-center">
+    <div class="flex flex-col bg-beige text-deep-dark pt-3 pr-1 pb-4 gap-y-5 w-60 h-80 rounded">
+        <div class="flex justify-between items-center pl-3 pr-2">
             <h4 class="text-sm font-bold">Авиакомпании</h4>
             <button type="button" id="close-filter" @click="resetFilters">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -38,8 +38,8 @@ watch(airlineFilter, () => {
             </button>
 
         </div>
-        <div class="flex flex-col overflow-y-scroll h-full gap-y-5 airline-list">
-            <label class="flex gap-x-3 items-center cursor-pointer custom-label text-deep-dark text-xs"
+        <div class="flex flex-col overflow-y-scroll h-full airline-list">
+            <label class="flex gap-x-3 items-center cursor-pointer custom-label text-deep-dark text-xs hover:bg-deep-beige py-[10px] pl-3"
                 v-for="(airline, code) in airlines">
                 <span class="w-3 h-3 bg-white rounded-sm border-[1px] border-solid border-grey relative checkbox-custom"
                     :class="{ 'bg-bright-green border-bright-green checkbox-custom-checked': airlineFilter.includes(code) }"></span>

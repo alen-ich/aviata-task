@@ -40,8 +40,8 @@ watch(optionsFilter, ()=>{
 </script>
 
 <template>
-    <div class="flex flex-col bg-beige text-deep-dark pt-3 px-3 pb-4 gap-y-5 w-60 rounded">
-        <div class="flex justify-between items-center">
+    <div class="flex flex-col bg-beige text-deep-dark pt-3 pb-4 pr-1 gap-y-5 w-60 rounded">
+        <div class="flex justify-between items-center pl-3 pr-2">
             <h4 class="text-sm font-bold">Опции тарифа</h4>
             <button type="button" id="close-filter" @click="resetFilters">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -52,8 +52,8 @@ watch(optionsFilter, ()=>{
             </button>
 
         </div>
-        <div class="flex flex-col gap-y-5">
-            <label class="flex gap-x-3 items-center cursor-pointer custom-label text-deep-dark text-xs"
+        <div class="flex flex-col">
+            <label class="flex gap-x-3 items-center cursor-pointer custom-label text-deep-dark text-xs pl-3 py-[10px] hover:bg-deep-beige"
                 v-for="option in optionsArr">
                 <span class="w-3 h-3 bg-white rounded-sm border-[1px] border-solid border-grey relative checkbox-custom"
                     :class="{ 'bg-bright-green border-bright-green checkbox-custom-checked': optionsFilter.includes(option.value) }"></span>

@@ -56,11 +56,12 @@ const dateDiff = computed(() => {
                                     class="w-[5px] h-[5px] border-[1px] border-solid border-grey rounded-full bg-white z-10">
                                 </div>
                             </div>
-                            <div class="flex justify-center text-orange-yellow text-xs">
+                            <div v-if="ticketData.itineraries[0][0].stops > 0"
+                                class="flex justify-center text-orange-yellow text-xs">
                                 через Шымкент, 1 ч 50 м
                             </div>
                         </div>
-                        <TicketDate :date="arrDate" :date-diff="dateDiff"/>
+                        <TicketDate :date="arrDate" :date-diff="dateDiff" />
                     </div>
                 </div>
             </div>
