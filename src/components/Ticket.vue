@@ -1,7 +1,20 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue';
 import TicketDate from './TicketDate.vue'
 
-defineProps<{ ticketData: any }>()
+const props = defineProps<{ ticketData: any, airlines: any }>()
+
+onMounted(()=>{
+    airlineName.value = findAirline(props.ticketData.validating_carrier)
+    airlineLogo.value = `https://aviata.kz/static/airline-logos/80x80/${props.ticketData.validating_carrier}.png`
+})
+
+const airlineName = ref()
+const airlineLogo = ref()
+
+const findAirline = (code: string) => {
+    return props.airlines[code]
+}
 </script>
 
 <template>
@@ -10,9 +23,9 @@ defineProps<{ ticketData: any }>()
             <div>
                 <div class="flex items-center">
                     <div class="flex gap-x-3 items-center">
-                        <img src="https://aviata.kz/static/airline-logos/80x80/KC.png" alt="" width="16" height="20">
+                        <img :src="airlineLogo" alt="" width="16" height="20">
                         <div class="text-deep-dark font-semibold text-sm w-[100px]">
-                            Air Astana
+                            {{ airlineName }}
                         </div>
                     </div>
                     <div class="flex gap-x-8">

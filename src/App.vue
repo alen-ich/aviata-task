@@ -32,7 +32,7 @@ const readJSON = () => {
           фильтры</button>
       </div>
     </div>
-    <TicketList :tickets="dataFlights" />
+    <TicketList :tickets="dataFlights" :airlines="dataAirlines"/>
   </div>
 </template>
 

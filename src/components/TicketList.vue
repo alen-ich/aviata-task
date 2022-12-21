@@ -2,14 +2,14 @@
 import { ref } from 'vue'
 import Ticket from './Ticket.vue'
 
-defineProps<{ tickets: any }>()
+defineProps<{ tickets: any, airlines: any }>()
 
 const count = ref(0)
 </script>
 
 <template>
   <div class="flex flex-col gap-y-3">
-    <Ticket v-for="ticket in tickets" :ticket-data="ticket" :id="ticket.id"/>
+    <Ticket v-for="ticket in tickets" :ticket-data="ticket" :id="ticket.id" :airlines="airlines"/>
   </div>
 </template>
 
