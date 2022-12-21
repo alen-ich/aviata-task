@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const count = ref(0)
+const companyArr = ref([])
 </script>
 
 <template>
@@ -17,11 +17,27 @@ const count = ref(0)
             </div>
 
         </div>
+        <div class="flex flex-col overflow-auto">
+            <label class="flex gap-x-3 items-center cursor-pointer custom-label text-deep-dark text-xs">
+                <span class="w-3 h-3 bg-white rounded-sm border-[1px] border-solid border-grey relative checkbox-custom"></span>
+                <input type="checkbox" class="hidden">
+                Air Astana
+            </label>
+        </div>
     </div>
 </template>
 
 <style scoped>
 #close-filter:hover .close-filter-icon {
     fill: #7284e4;
+}
+
+.custom-label:hover .checkbox-custom::before {
+    content: url("../assets/mark-icon.svg");
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    top: -3px;
+    left: 1px;
 }
 </style>
