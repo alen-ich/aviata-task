@@ -23,10 +23,12 @@ const readJSON = () => {
 </script>
 
 <template>
-  <div class="flex gap-x-5">
-    <div class="flex flex-col gap-y-3">
-      <OptionsFilter />
-      <CompanyFilter :airlines="dataAirlines" />
+  <div class="flex gap-x-5 relative">
+    <div>
+      <div class="flex flex-col gap-y-3 sticky top-3">
+        <OptionsFilter />
+        <CompanyFilter :airlines="dataAirlines" />
+      </div>
     </div>
     <TicketList :tickets="dataFlights" />
   </div>
