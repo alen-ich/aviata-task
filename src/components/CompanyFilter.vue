@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeMount, onMounted, ref } from 'vue'
+import { ref } from 'vue'
 
 const airlineFilter = ref([] as any)
 
@@ -24,8 +24,8 @@ defineProps<{ airlines: any }>()
             </button>
 
         </div>
-        <div class="flex flex-col overflow-auto">
-            <label class="flex gap-x-3 items-center cursor-pointer custom-label text-deep-dark text-xs h-8"
+        <div class="flex flex-col overflow-scroll h-full gap-y-5">
+            <label class="flex gap-x-3 items-center cursor-pointer custom-label text-deep-dark text-xs"
                 v-for="(airline, code) in airlines">
                 <span
                     class="w-3 h-3 bg-white rounded-sm border-[1px] border-solid border-grey relative checkbox-custom"

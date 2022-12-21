@@ -2,6 +2,7 @@
 import { onMounted, ref } from 'vue'
 import TicketList from './components/TicketList.vue'
 import CompanyFilter from './components/CompanyFilter.vue'
+import OptionsFilter from './components/OptionsFilter.vue'
 
 onMounted(() => {
   readJSON()
@@ -26,6 +27,7 @@ const readJSON = () => {
     <div class="flex flex-col"></div>
     <TicketList msg="Vite + Vue" />
     <CompanyFilter :airlines="dataAirlines"/>
+    <OptionsFilter />
   </div>
 </template>
 
