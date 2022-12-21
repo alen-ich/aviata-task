@@ -2,15 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  box-sizing: border-box;
-}
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap');
 
-:root {
-  font-family: Open-Sans, sans-serif;
+* {
+  font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
+}
+
+*, *:before, *:after {
+	margin: 0;
+	padding: 0;
+
+	-webkit-box-sizing: border-box !important;
+	-moz-box-sizing: border-box !important;
+	-ms-box-sizing: border-box !important;
+	box-sizing: border-box !important;
 }
 
 body {

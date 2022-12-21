@@ -7,7 +7,7 @@ const count = ref(0)
 </script>
 
 <template>
-    <div class="flex overflow-hidden">
+    <div class="flex rounded shadow-[0_2px_4px_rgba(0,0,0,0.15)] bg-white">
         <div class="flex flex-col gap-y-[46px] pt-10 pb-4 pl-11">
             <div>
                 <div class="flex items-center">

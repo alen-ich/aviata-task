@@ -8,7 +8,7 @@ const count = ref(0)
 </script>
 
 <template>
-  <div class="flex bg-white rounded shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
+  <div class="flex flex-col">
     <Ticket />
   </div>
 </template>
