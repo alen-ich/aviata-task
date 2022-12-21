@@ -12,6 +12,8 @@ module.exports = {
         "beige": "#f5f5f5",
         "grey": "#b9b9b9",
         "blue": "#7284e4",
+        "orange-yellow": "#ff9900",
+        "bright-red": "#ff3724"
       },
     },
   },

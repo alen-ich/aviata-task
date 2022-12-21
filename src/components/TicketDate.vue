@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 
-const props = defineProps<{ date: any }>()
+const props = defineProps<{ date: any, dateDiff?: number }>()
 
 onMounted(() => {
     const dateValue = new Date(props.date)
@@ -18,9 +18,12 @@ const dayNames = ["пн", "вт", "ср", "чт", "пт", "сб", "вс"]
 </script>
 
 <template>
-    <div class="flex flex-col items-center text-deep-dark">
-        <div class="text-xs">{{ dateData }}</div>
-        <div class="text-2xl font-semibold">{{ timeData }}</div>
+    <div class="flex items-start">
+        <div class="flex flex-col items-center text-deep-dark">
+            <div class="text-xs">{{ dateData }}</div>
+            <div class="text-2xl font-semibold">{{ timeData }}</div>
+        </div>
+        <div v-if="dateDiff" class="text-bright-red text-[10px] leading-[14px] font-semibold h-4 mt-[2px] ml-[1px]">+{{ dateDiff }}</div>
     </div>
 </template>
 
