@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref,watch } from 'vue'
+import { ref, watch } from 'vue'
 
 const airlineFilter = ref([] as any)
 
@@ -8,11 +8,19 @@ const resetFilters = () => {
 }
 
 const props = defineProps<{ airlines: any, filtersResetStatus: boolean }>()
+const emit = defineEmits<{
+    (e: 'filterByAirline', airlines: Array<any>): void
+}>()
 
-watch(() => props.filtersResetStatus, ()=>{
-    if(props.filtersResetStatus){
+watch(() => props.filtersResetStatus, () => {
+    if (props.filtersResetStatus) {
         airlineFilter.value = []
     }
+})
+
+watch(airlineFilter, () => {
+    const resultOptions = Array.from(airlineFilter.value)
+    emit('filterByAirline', resultOptions)
 })
 
 </script>
@@ -33,9 +41,8 @@ watch(() => props.filtersResetStatus, ()=>{
         <div class="flex flex-col overflow-y-scroll h-full gap-y-5">
             <label class="flex gap-x-3 items-center cursor-pointer custom-label text-deep-dark text-xs"
                 v-for="(airline, code) in airlines">
-                <span
-                    class="w-3 h-3 bg-white rounded-sm border-[1px] border-solid border-grey relative checkbox-custom"
-                    :class="{'bg-bright-green border-bright-green checkbox-custom-checked' : airlineFilter.includes(code)}"></span>
+                <span class="w-3 h-3 bg-white rounded-sm border-[1px] border-solid border-grey relative checkbox-custom"
+                    :class="{ 'bg-bright-green border-bright-green checkbox-custom-checked': airlineFilter.includes(code) }"></span>
                 <input type="checkbox" class="hidden" v-model="airlineFilter" :value="code">
                 {{ airline }}
             </label>
@@ -44,17 +51,16 @@ watch(() => props.filtersResetStatus, ()=>{
 </template>
 
 <style scoped>
-
 #close-filter:hover .close-filter-icon {
     fill: #7284e4;
 }
 
-.custom-label:hover .checkbox-custom::before  {
+.custom-label:hover .checkbox-custom::before {
     content: url("../assets/mark-icon.svg");
     width: 8px;
     height: 8px;
     position: absolute;
-    top: -8px;
+    top: -9px;
     left: 1px;
 }
 
@@ -63,7 +69,7 @@ watch(() => props.filtersResetStatus, ()=>{
     width: 8px;
     height: 8px;
     position: absolute;
-    top: -8px;
+    top: -9px;
     left: 1px;
 }
 
@@ -72,8 +78,7 @@ watch(() => props.filtersResetStatus, ()=>{
     width: 8px;
     height: 8px;
     position: absolute;
-    top: -8px;
+    top: -9px;
     left: 1px;
 }
-
 </style>

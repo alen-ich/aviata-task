@@ -22,12 +22,20 @@ const resetFilters = () => {
     optionsFilter.value = []
 }
 
-const props = defineProps<{filtersResetStatus: boolean}>()
+const props = defineProps<{ filtersResetStatus: boolean }>()
+const emit = defineEmits<{
+    (e: 'filterByOption', options: Array<any>): void
+}>()
 
-watch(() => props.filtersResetStatus, ()=>{
-    if(props.filtersResetStatus){
+watch(() => props.filtersResetStatus, () => {
+    if (props.filtersResetStatus) {
         optionsFilter.value = []
     }
+})
+
+watch(optionsFilter, ()=>{
+    const resultOptions = Array.from(optionsFilter.value)
+    emit('filterByOption', resultOptions)
 })
 </script>
 
@@ -66,7 +74,7 @@ watch(() => props.filtersResetStatus, ()=>{
     width: 8px;
     height: 8px;
     position: absolute;
-    top: -8px;
+    top: -9px;
     left: 1px;
 }
 
@@ -75,7 +83,7 @@ watch(() => props.filtersResetStatus, ()=>{
     width: 8px;
     height: 8px;
     position: absolute;
-    top: -8px;
+    top: -9px;
     left: 1px;
 }
 
@@ -84,7 +92,7 @@ watch(() => props.filtersResetStatus, ()=>{
     width: 8px;
     height: 8px;
     position: absolute;
-    top: -8px;
+    top: -9px;
     left: 1px;
 }
 </style>
