@@ -27,10 +27,7 @@ const getDurMinute = (seconds: number) => (seconds - Math.floor(seconds / 3600) 
 
 const flightLayovers = computed(() => props.ticketData.itineraries[0][0].layovers.slice(0, -1))
 
-const flightTransits = computed(() => {
-    console.log(flightLayovers.value.length)
-    return props.ticketData.itineraries[0][0].segments.slice(0, flightLayovers.value.length)
-})
+const flightTransits = computed(() => props.ticketData.itineraries[0][0].segments.slice(0, flightLayovers.value.length))
 </script>
 
 <template>

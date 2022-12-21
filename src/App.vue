@@ -43,16 +43,16 @@ const filterTickets = (filters: Array<any>) => {
   }
   if (filters.includes('refund')) {
     result = filterByRefundable(result)
-  } if (dataAirlines.value.hasOwnProperty(filters[0])) {
+  }
+  if (dataAirlines.value.hasOwnProperty(filters[0])) {
     let resultByAirlines = [] as Array<any>
-      console.log(filters)
     for (let i = 0; i < filters.length; i++) {
       let test = filterByAirline(result, filters[i])
-      resultByAirlines.concat(test)
-      console.log(test)
+      resultByAirlines.push(...test)
     }
+    console.log(resultByAirlines)
+    displayFlights.value = resultByAirlines
   }
-  displayFlights.value = result
 
 }
 
