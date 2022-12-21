@@ -36,7 +36,7 @@ defineProps<{ ticketData: any }>()
             <div class="text-dark flex justify-center items-center text-xs mb-3">
                 Цена за всех пассажиров
             </div>
-            <div class="flex justify-between w-full items-center">
+            <div class="flex w-full items-center gap-x-3 justify-center">
                 <div v-if="ticketData.services.hasOwnProperty('0PC')" class="text-deep-dark text-xs">Нет багажа</div>
                 <div v-else-if="ticketData.services.hasOwnProperty('20KG')"  class="text-deep-dark text-xs">{{ ticketData.services['20KG'].alt_text }}</div>
                 <div v-else-if="ticketData.services.hasOwnProperty('1PC')"  class="text-deep-dark text-xs">{{ ticketData.services['1PC'].alt_text }}</div>
