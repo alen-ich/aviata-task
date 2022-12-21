@@ -9,7 +9,7 @@ const count = ref(0)
 
 <template>
   <div class="flex flex-col gap-y-3">
-    <Ticket v-for="ticket in tickets"/>
+    <Ticket v-for="ticket in tickets" :ticket-data="ticket" :id="ticket.id"/>
   </div>
 </template>
 
