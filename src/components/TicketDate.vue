@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 
-const props = defineProps<{ date: any, dateDiff?: number }>()
+const props = defineProps<{ date: string, dateDiff?: number }>()
 
 onMounted(() => {
     const dateValue = new Date(props.date)

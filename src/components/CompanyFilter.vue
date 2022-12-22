@@ -1,20 +1,20 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 
-const airlineFilter = ref([] as any)
+const airlineFilter = ref([] as Array<string>)
 
 const resetFilters = () => {
-    airlineFilter.value = []
+    airlineFilter.value = [] as Array<string>
 }
 
 const props = defineProps<{ airlines: any, filtersResetStatus: boolean }>()
 const emit = defineEmits<{
-    (e: 'filterByAirline', airlines: Array<any>): void
+    (e: 'filterByAirline', airlines: Array<string>): void
 }>()
 
 watch(() => props.filtersResetStatus, () => {
     if (props.filtersResetStatus) {
-        airlineFilter.value = []
+        airlineFilter.value = ['']
     }
 })
 
@@ -43,7 +43,7 @@ watch(airlineFilter, () => {
             <label class="flex gap-x-3 items-center cursor-pointer custom-label text-deep-dark text-xs hover:bg-deep-beige py-[10px] pl-3"
                 v-for="(airline, code) in airlines">
                 <span class="w-3 h-3 bg-white rounded-sm border-[1px] border-solid border-grey relative checkbox-custom"
-                    :class="{ 'bg-bright-green border-bright-green checkbox-custom-checked': airlineFilter.includes(code) }"></span>
+                    :class="{ 'bg-bright-green border-bright-green checkbox-custom-checked': airlineFilter.includes(code.toString()) }"></span>
                 <input type="checkbox" class="hidden" v-model="airlineFilter" :value="code">
                 {{ airline }}
             </label>

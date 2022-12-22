@@ -1,15 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { TicketInterface } from '../interfaces/Ticket';
 import Ticket from './Ticket.vue'
 
 interface Props {
-  tickets?: any,
+  tickets?: Array<TicketInterface>,
   airlines?: any
 }
 
-const props = withDefaults(defineProps<Props>(), { tickets: [], airlines: [] })
-
-const count = ref(0)
+const props = withDefaults(defineProps<Props>(), { tickets: () => [], airlines: [] })
 </script>
 
 <template>
@@ -18,10 +16,3 @@ const count = ref(0)
   </div>
   <div v-else class="xl:w-[880px] flex justify-center items-center font-bold text-xl">Билеты не найдены</div>
 </template>
-
-<style scoped>
-.read-the-docs {
-  color: #888;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
-}
-</style>

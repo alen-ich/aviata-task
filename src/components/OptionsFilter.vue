@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 
-const optionsArr = ref([
+interface Option {
+    name: string;
+    value: string;
+}
+
+const optionsArr = ref<Array<Option>>([
     {
         name: "Только прямые",
         value: "filterByDirect"
@@ -16,7 +21,7 @@ const optionsArr = ref([
     }
 ])
 
-const optionsFilter = ref([] as any)
+const optionsFilter = ref([] as Array<string>)
 
 const resetFilters = () => {
     optionsFilter.value = []
@@ -24,12 +29,12 @@ const resetFilters = () => {
 
 const props = defineProps<{ filtersResetStatus: boolean }>()
 const emit = defineEmits<{
-    (e: 'filterByOption', options: Array<any>): void
+    (e: 'filterByOption', options: Array<string>): void
 }>()
 
 watch(() => props.filtersResetStatus, () => {
     if (props.filtersResetStatus) {
-        optionsFilter.value = []
+        optionsFilter.value = [] as Array<string>
     }
 })
 

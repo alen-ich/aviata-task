@@ -1,10 +1,14 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
+import { TicketInterface } from '../interfaces/Ticket';
 
-const props = defineProps<{ ticketData: any }>()
+const props = defineProps<{ ticketData: TicketInterface }>()
 
 const flightOrigin = computed(() => props.ticketData.itineraries[0][0].segments[0].origin_code)
-const flightDest = computed(() => props.ticketData.itineraries[0][0].segments.at(-1).dest_code)
+const flightDest = computed(() => {
+    const length = props?.ticketData?.itineraries[0][0].segments.length
+    return props?.ticketData?.itineraries[0][0].segments[length - 1].dest_code
+})
 
 const flightDurHour = computed(() => getDurHour(props.ticketData.itineraries[0][0].traveltime))
 const flightDurMinute = computed(() => getDurMinute(props.ticketData.itineraries[0][0].traveltime))
@@ -17,7 +21,7 @@ const flightTransits = computed(() => props.ticketData.itineraries[0][0].segment
 </script>
 
 <template>
-    <div class="flex flex-col items-center order-last xl:order-2">
+    <div class="flex flex-col items-center">
         <div class="flex gap-x-11 mb-5 xl:mb-[6px]">
             <div class="flex text-grey text-[10px] leading-3">{{
                     flightOrigin

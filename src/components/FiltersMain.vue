@@ -3,9 +3,14 @@ import { ref } from 'vue'
 import CompanyFilter from './CompanyFilter.vue'
 import OptionsFilter from './OptionsFilter.vue'
 
-const props = defineProps<{airlines: any}>()
+interface FilterMain {
+    options: Array<string>,
+    airlines: Array<string>
+}
+
+const props = defineProps<{airlines: Object}>()
 const emit = defineEmits<{
-    (e: 'filterFlights', filters: any): void
+    (e: 'filterFlights', filters: FilterMain): void
 }>()
 
 const filtersResetStatus = ref(false)

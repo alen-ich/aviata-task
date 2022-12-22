@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import { TicketInterface } from '../interfaces/Ticket';
 import TicketDate from './TicketDate.vue'
 import TicketDestination from './TicketDestination.vue'
 
-const props = defineProps<{ ticketData: any, airlines: any }>()
+const props = defineProps<{ ticketData: TicketInterface, airlines: Object }>()
 
 const airlineLogo = computed(() => {
     return `https://aviata.kz/static/airline-logos/80x80/${props.ticketData.validating_carrier}.png`
