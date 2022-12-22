@@ -82,7 +82,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="flex flex-col xl:flex-row gap-x-5 relative">
+  <div class="xl:flex xl:flex-row gap-x-5 relative">
     <div>
       <FiltersMain :airlines="dataAirlines" @filter-flights="filterDataFlights" />
     </div>
