@@ -1,16 +1,15 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import TicketList from './components/TicketList.vue'
-import CompanyFilter from './components/CompanyFilter.vue'
-import OptionsFilter from './components/OptionsFilter.vue'
+import FiltersMain from './components/FiltersMain.vue'
 
 onMounted(() => {
   readJSON()
 })
 const dataAirlines = ref()
 const dataFlights = ref()
-const displayFlights = ref()
 
+/* read flights and airlines data from results.json */
 const readJSON = () => {
   fetch("../../results.json")
     .then((response) =>
@@ -18,20 +17,67 @@ const readJSON = () => {
     ).then((data) => {
       dataAirlines.value = data.airlines
       dataFlights.value = data.flights
-      displayFlights.value = data.flights
     }
     )
 }
 
-const filtersResetStatus = ref(false)
-
-const resetAllFilters = () => {
-  filtersResetStatus.value = true
-  readJSON()
-  setTimeout(() => {
-    filtersResetStatus.value = false
-  }, 500)
+const filtersMain = ref({
+  options: [''],
+  airlines: ['']
+})
+const filterHelper = {
+  filterByDirect: (flights: Array<any>) => {
+    return flights.filter((e: any) => !e.itineraries[0][0].layovers.length)
+  },
+  filterByBaggage: (flights: Array<any>) => {
+    return flights.filter((e: any) => !e.services.hasOwnProperty('0PC'))
+  },
+  filterByRefund: (flights: Array<any>) => {
+    return flights.filter((e: any) => e.refundable)
+  },
+  filterByAirline: (flights: Array<any>, airlines?: Array<string>) => {
+    const result = []
+    for (let i = 0; i < flights.length; i++) {
+      if (airlines) {
+        for (let j = 0; j < airlines?.length; j++) {
+          if (flights[i].validating_carrier === airlines[j]) {
+            result.push(flights[i])
+          }
+        }
+      }
+    }
+    return result
+  }
 }
+
+const filterDataFlights = (filters: any) => {
+  filtersMain.value = filters
+}
+
+const displayFlights = computed(() => {
+  console.log('test')
+  let result = dataFlights.value
+  let temp = dataFlights.value
+  if (filtersMain.value.airlines.length && filtersMain.value.airlines[0] !== '') {
+    result = []
+    for (let i = 0; i < filtersMain.value.airlines.length; i++) {
+      result.push(...filterHelper['filterByAirline'](temp, filtersMain.value.airlines))
+    }
+    if (filtersMain.value.options.length && filtersMain.value.options[0] !== '') {
+      for (let i = 0; i < filtersMain.value.options.length; i++) {
+        result = filterHelper[filtersMain.value.options[i] as keyof typeof filterHelper](result)
+      }
+    }
+  } else {
+    result = dataFlights.value
+    if (filtersMain.value.options.length && filtersMain.value.options[0] !== '') {
+      for (let i = 0; i < filtersMain.value.options.length; i++) {
+        result = filterHelper[filtersMain.value.options[i] as keyof typeof filterHelper](result)
+      }
+    }
+  }
+  return result
+})
 
 const filterTickets = (filters: Array<any>) => {
   let result = dataFlights.value
@@ -51,11 +97,12 @@ const filterTickets = (filters: Array<any>) => {
       resultByAirlines.push(...test)
     }
     console.log(resultByAirlines)
-    displayFlights.value = resultByAirlines
+    dataFlights.value = resultByAirlines
   }
-
 }
 
+
+/* filtering functions */
 const filterByDirect = (flights: Array<any>) => {
   return flights.filter((e: any) => !e.itineraries[0][0].layovers.length)
 }
@@ -76,14 +123,7 @@ const filterByAirline = (flights: Array<any>, airline: string) => {
 <template>
   <div class="flex flex-col xl:flex-row gap-x-5 relative">
     <div>
-      <div class="flex flex-col gap-y-3 sticky top-12 mb-5">
-        <OptionsFilter :filters-reset-status="filtersResetStatus" @filter-by-option="filterTickets" />
-        <CompanyFilter :airlines="dataAirlines" :filters-reset-status="filtersResetStatus"
-          @filter-by-airline="filterTickets" />
-        <button type="button" class="text-blue text-xs border-dashed border-blue border-b-[1px] w-fit cursor-pointer"
-          @click="resetAllFilters">Сбросить все
-          фильтры</button>
-      </div>
+      <FiltersMain :airlines="dataAirlines" @filter-flights="filterDataFlights" />
     </div>
     <TicketList :tickets="displayFlights" :airlines="dataAirlines" />
   </div>

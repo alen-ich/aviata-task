@@ -4,15 +4,15 @@ import { ref, watch } from 'vue'
 const optionsArr = ref([
     {
         name: "Только прямые",
-        value: "direct"
+        value: "filterByDirect"
     },
     {
         name: "Только с багажом",
-        value: "baggage"
+        value: "filterByBaggage"
     },
     {
         name: "Только возвратные",
-        value: "refund"
+        value: "filterByRefund"
     }
 ])
 
