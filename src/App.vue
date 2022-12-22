@@ -41,6 +41,7 @@ const filterHelper = {
           }
         }
       }
+      console.log(result)
     }
     return result
   }
@@ -51,13 +52,13 @@ const filterDataFlights = (filters: any) => {
 }
 
 const displayFlights = computed(() => {
-  let result = dataFlights.value
-  let temp = dataFlights.value
+  let result = []
   if (filtersMain.value.airlines.length && filtersMain.value.airlines[0] !== '') {
     result = []
-    for (let i = 0; i < filtersMain.value.airlines.length; i++) {
-      result.push(...filterHelper['filterByAirline'](temp, filtersMain.value.airlines))
-    }
+    const filtered = filterHelper['filterByAirline'](dataFlights.value, filtersMain.value.airlines)
+    console.log(filtersMain.value.airlines)
+    result.push(...filtered)
+    
     if (filtersMain.value.options.length && filtersMain.value.options[0] !== '') {
       for (let i = 0; i < filtersMain.value.options.length; i++) {
         result = filterHelper[filtersMain.value.options[i] as keyof typeof filterHelper](result)
@@ -86,6 +87,7 @@ onMounted(() => {
     <div>
       <FiltersMain :airlines="dataAirlines" @filter-flights="filterDataFlights" />
     </div>
+    {{ filtersMain.airlines }}
     <TicketList :tickets="displayFlights" :airlines="dataAirlines" />
   </div>
 </template>

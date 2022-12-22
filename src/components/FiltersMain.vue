@@ -8,7 +8,7 @@ interface FilterMain {
     airlines: Array<string>
 }
 
-const props = defineProps<{airlines: Object}>()
+const props = defineProps<{airlines: any}>()
 const emit = defineEmits<{
     (e: 'filterFlights', filters: FilterMain): void
 }>()
