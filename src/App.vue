@@ -22,13 +22,13 @@ const filtersMain = ref({
   airlines: ['']
 })
 const filterHelper = {
-  filterByDirect: (flights: Array<any>) => {
+  filterByDirect: (flights: Array<string>) => {
     return flights.filter((e: any) => !e.itineraries[0][0].layovers.length)
   },
-  filterByBaggage: (flights: Array<any>) => {
+  filterByBaggage: (flights: Array<string>) => {
     return flights.filter((e: any) => !e.services.hasOwnProperty('0PC'))
   },
-  filterByRefund: (flights: Array<any>) => {
+  filterByRefund: (flights: Array<string>) => {
     return flights.filter((e: any) => e.refundable)
   },
   filterByAirline: (flights: Array<any>, airlines?: Array<string>) => {
@@ -41,7 +41,6 @@ const filterHelper = {
           }
         }
       }
-      console.log(result)
     }
     return result
   }
@@ -52,13 +51,12 @@ const filterDataFlights = (filters: any) => {
 }
 
 const displayFlights = computed(() => {
-  let result = []
+  let result = [] 
   if (filtersMain.value.airlines.length && filtersMain.value.airlines[0] !== '') {
     result = []
     const filtered = filterHelper['filterByAirline'](dataFlights.value, filtersMain.value.airlines)
-    console.log(filtersMain.value.airlines)
     result.push(...filtered)
-    
+
     if (filtersMain.value.options.length && filtersMain.value.options[0] !== '') {
       for (let i = 0; i < filtersMain.value.options.length; i++) {
         result = filterHelper[filtersMain.value.options[i] as keyof typeof filterHelper](result)
