@@ -22,7 +22,7 @@ const flightTransits = computed(() => props.ticketData.itineraries[0][0].segment
 
 <template>
     <div class="flex flex-col items-center">
-        <div class="flex justify-between w-full mb-5 xl:mb-[6px]">
+        <div class="flex justify-between w-full mb-5 xl:mb-[6px] gap-x-11">
             <div class="flex text-grey text-[10px] leading-3">{{
                     flightOrigin
             }}</div>
