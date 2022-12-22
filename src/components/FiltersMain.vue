@@ -31,7 +31,6 @@ const updateFilters = () => {
 }
 
 const updateOptionsFilters = (options: Array<string>) => {
-    console.log(options)
     optionsFilters.value = options
     updateFilters()
 }

@@ -2,15 +2,21 @@
 import { ref } from 'vue'
 import Ticket from './Ticket.vue'
 
-defineProps<{ tickets: any, airlines: any }>()
+interface Props {
+  tickets?: any,
+  airlines?: any
+}
+
+const props = withDefaults(defineProps<Props>(), { tickets: [], airlines: [] })
 
 const count = ref(0)
 </script>
 
 <template>
-  <div class="flex flex-col gap-y-3 w-72 xl:w-[880px]">
-    <Ticket v-for="ticket in tickets" :ticket-data="ticket" :id="ticket.id" :airlines="airlines"/>
+  <div v-if="tickets.length" class="flex flex-col gap-y-3 w-72 xl:w-[880px]">
+    <Ticket v-for="ticket in tickets" :ticket-data="ticket" :id="ticket.id" :airlines="airlines" />
   </div>
+  <div v-else class="xl:w-[880px] flex justify-center items-center font-bold text-xl">Билеты не найдены</div>
 </template>
 
 <style scoped>

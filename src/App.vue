@@ -3,13 +3,9 @@ import { computed, onMounted, ref } from 'vue'
 import TicketList from './components/TicketList.vue'
 import FiltersMain from './components/FiltersMain.vue'
 
-onMounted(() => {
-  readJSON()
-})
 const dataAirlines = ref()
 const dataFlights = ref()
 
-/* read flights and airlines data from results.json */
 const readJSON = () => {
   fetch("../../results.json")
     .then((response) =>
@@ -55,7 +51,6 @@ const filterDataFlights = (filters: any) => {
 }
 
 const displayFlights = computed(() => {
-  console.log('test')
   let result = dataFlights.value
   let temp = dataFlights.value
   if (filtersMain.value.airlines.length && filtersMain.value.airlines[0] !== '') {
@@ -79,45 +74,11 @@ const displayFlights = computed(() => {
   return result
 })
 
-const filterTickets = (filters: Array<any>) => {
-  let result = dataFlights.value
-  if (filters.includes('direct')) {
-    result = filterByDirect(result)
-  }
-  if (filters.includes('baggage')) {
-    result = filterByBaggage(result)
-  }
-  if (filters.includes('refund')) {
-    result = filterByRefundable(result)
-  }
-  if (dataAirlines.value.hasOwnProperty(filters[0])) {
-    let resultByAirlines = [] as Array<any>
-    for (let i = 0; i < filters.length; i++) {
-      let test = filterByAirline(result, filters[i])
-      resultByAirlines.push(...test)
-    }
-    console.log(resultByAirlines)
-    dataFlights.value = resultByAirlines
-  }
-}
+onMounted(() => {
+  readJSON()
+})
 
 
-/* filtering functions */
-const filterByDirect = (flights: Array<any>) => {
-  return flights.filter((e: any) => !e.itineraries[0][0].layovers.length)
-}
-
-const filterByBaggage = (flights: Array<any>) => {
-  return flights.filter((e: any) => !e.services.hasOwnProperty('0PC'))
-}
-
-const filterByRefundable = (flights: Array<any>) => {
-  return flights.filter((e: any) => e.refundable)
-}
-
-const filterByAirline = (flights: Array<any>, airline: string) => {
-  return flights.filter((e: any) => e.validating_carrier === airline)
-}
 </script>
 
 <template>
