@@ -51,7 +51,7 @@ const filterDataFlights = (filters: any) => {
 }
 
 const displayFlights = computed(() => {
-  let result = [] 
+  let result = []
   if (filtersMain.value.airlines.length && filtersMain.value.airlines[0] !== '') {
     result = []
     const filtered = filterHelper['filterByAirline'](dataFlights.value, filtersMain.value.airlines)
@@ -85,7 +85,6 @@ onMounted(() => {
     <div>
       <FiltersMain :airlines="dataAirlines" @filter-flights="filterDataFlights" />
     </div>
-    {{ filtersMain.airlines }}
     <TicketList :tickets="displayFlights" :airlines="dataAirlines" />
   </div>
 </template>
