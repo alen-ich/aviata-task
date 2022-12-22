@@ -62,13 +62,18 @@ const dateDiff = computed(() => {
             </div>
             <div class="gap-x-11 hidden xl:flex">
                 <div class="flex gap-x-3 items-center">
-                    <div class="text-blue text-xs border-dashed border-blue border-b-[1px] w-fit cursor-pointer">Детали
+                    <div
+                        class="text-blue text-xs border-dashed border-blue border-b-[1px] w-fit cursor-pointer hover:text-deep-blue">
+                        Детали
                         перелета</div>
-                    <div class="text-blue text-xs border-dashed border-blue border-b-[1px] w-fit cursor-pointer">Условия
+                    <div
+                        class="text-blue text-xs border-dashed border-blue border-b-[1px] w-fit cursor-pointer hover:text-deep-blue">
+                        Условия
                         тарифа</div>
                 </div>
                 <div v-if="!ticketData.refundable" class="flex gap-x-2 items-center text-dark text-xs">
-                    <img src="../assets/non-ref.svg" alt="" width="16" height="16">
+                    <img src="../assets/non-ref.svg" alt="" width="16" height="16"
+                        class=" hover:rotate-90 transition-transform">
                     невозвратный
                 </div>
             </div>
@@ -78,7 +83,7 @@ const dateDiff = computed(() => {
             <div class="text-2xl leading-7 text-deep-dark xl:mb-3">{{ ticketData.price }} <span class="text-lg">₸</span>
             </div>
             <button type="button"
-                class="rounded bg-bright-green w-[200px] h-10 text-white font-bold text-lg leading-[25px] flex justify-center items-center xl:mb-2">Выбрать</button>
+                class="rounded bg-bright-green w-[200px] h-10 text-white font-bold text-lg leading-[25px] flex justify-center items-center xl:mb-2 hover:scale-105 transition-transform">Выбрать</button>
             <div class="text-dark flex justify-center items-center text-xs xl:mb-3">
                 Цена за всех пассажиров
             </div>
@@ -89,9 +94,9 @@ const dateDiff = computed(() => {
                     class="text-deep-dark text-xs w-[66px] text-center">{{ ticketData.services['20KG'].alt_text }}</div>
                 <div v-else-if="ticketData.services.hasOwnProperty('1PC')"
                     class="text-deep-dark text-xs w-[66px] text-center">{{ ticketData.services['1PC'].alt_text }}</div>
-                <div
-                    class="flex justify-center items-center rounded-sm bg-light-blue text-deep-blue font-semibold text-xs px-2 py-[3px]">
-                    + Добавить багаж</div>
+                <button type="button"
+                    class="flex justify-center items-center rounded-sm bg-light-blue text-deep-blue font-semibold text-xs px-2 py-[3px] hover:scale-105 transition-transform">
+                    + Добавить багаж</button>
             </div>
         </div>
     </div>

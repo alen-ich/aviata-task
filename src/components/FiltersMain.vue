@@ -52,7 +52,7 @@ const updateAirlinesFilters = (airlines: Array<string>) => {
         <OptionsFilter :filters-reset-status="filtersResetStatus" @filter-by-option="updateOptionsFilters" />
         <CompanyFilter :airlines="airlines" :filters-reset-status="filtersResetStatus"
             @filter-by-airline="updateAirlinesFilters" />
-        <button type="button" class="text-blue text-xs border-dashed border-blue border-b-[1px] w-fit cursor-pointer"
+        <button type="button" class="text-blue text-xs border-dashed border-blue border-b-[1px] w-fit cursor-pointer hover:text-deep-blue"
             @click="resetAllFilters">Сбросить все
             фильтры</button>
     </div>
