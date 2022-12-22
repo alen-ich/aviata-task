@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import CompanyFilter from './CompanyFilter.vue'
-import OptionsFilter from './OptionsFilter.vue'
+import FilterBox from './FilterBox.vue'
 
 interface FilterMain {
     options: Array<string>,
@@ -49,9 +48,9 @@ const updateAirlinesFilters = (airlines: Array<string>) => {
 
 <template>
     <div class="flex flex-col gap-y-3 sticky top-12 mb-5">
-        <OptionsFilter :filters-reset-status="filtersResetStatus" @filter-by-option="updateOptionsFilters" />
-        <CompanyFilter :airlines="airlines" :filters-reset-status="filtersResetStatus"
-            @filter-by-airline="updateAirlinesFilters" />
+        <FilterBox mode="option" :filters-reset-status="filtersResetStatus" @filter-by-option="updateOptionsFilters" />
+        <FilterBox mode="airline" :airlines="airlines" :filters-reset-status="filtersResetStatus"
+            @filter-by-airline="updateAirlinesFilters"/>
         <button type="button" class="text-blue text-xs border-dashed border-blue border-b-[1px] w-fit cursor-pointer hover:text-deep-blue"
             @click="resetAllFilters">Сбросить все
             фильтры</button>

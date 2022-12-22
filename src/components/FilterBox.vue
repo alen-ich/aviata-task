@@ -1,15 +1,38 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 
+interface Option {
+    name: string;
+    value: string;
+}
+
+const optionsArr = ref<Array<Option>>([
+    {
+        name: "Только прямые",
+        value: "filterByDirect"
+    },
+    {
+        name: "Только с багажом",
+        value: "filterByBaggage"
+    },
+    {
+        name: "Только возвратные",
+        value: "filterByRefund"
+    }
+])
+
 const airlineFilter = ref([] as Array<string>)
+const optionsFilter = ref([] as Array<string>)
 
 const resetFilters = () => {
     airlineFilter.value = [] as Array<string>
+    optionsFilter.value = [] as Array<string>
 }
 
-const props = defineProps<{ airlines: any, filtersResetStatus: boolean }>()
+const props = defineProps<{ airlines?: any, filtersResetStatus: boolean, mode: string }>()
 const emit = defineEmits<{
-    (e: 'filterByAirline', airlines: Array<string>): void
+    (e: 'filterByAirline', airlines: Array<string>): void,
+    (e: 'filterByOption', options: Array<string>): void
 }>()
 
 watch(() => props.filtersResetStatus, () => {
@@ -23,12 +46,23 @@ watch(airlineFilter, () => {
     emit('filterByAirline', resultOptions)
 })
 
+watch(() => props.filtersResetStatus, () => {
+    if (props.filtersResetStatus) {
+        optionsFilter.value = [] as Array<string>
+    }
+})
+
+watch(optionsFilter, () => {
+    const resultOptions = Array.from(optionsFilter.value)
+    emit('filterByOption', resultOptions)
+})
 </script>
 
 <template>
-    <div class="flex flex-col bg-beige text-deep-dark pt-3 pr-1 pb-4 gap-y-5 w-72 xl:w-60 h-80 rounded">
+    <div class="flex flex-col bg-beige text-deep-dark pt-3 pr-1 pb-4 gap-y-5 w-72 xl:w-60 rounded" :class="{'h-80': mode === 'airline'}">
         <div class="flex justify-between items-center pl-3 pr-2">
-            <h4 class="text-sm font-bold">Авиакомпании</h4>
+            <h4 v-if="mode === 'airline'" class="text-sm font-bold">Авиакомпании</h4>
+            <h4 v-else class="text-sm font-bold">Опции тарифа</h4>
             <button type="button" id="close-filter" @click="resetFilters" class="tooltip">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path class="close-filter-icon" fill-rule="evenodd" clip-rule="evenodd"
@@ -39,13 +73,24 @@ watch(airlineFilter, () => {
             </button>
 
         </div>
-        <div class="flex flex-col overflow-y-scroll h-full airline-list">
-            <label class="flex gap-x-3 items-center cursor-pointer custom-label text-deep-dark text-xs hover:bg-deep-beige py-[10px] pl-3"
+        <div v-if="mode === 'airline'" class="flex flex-col overflow-y-auto h-full filter-option-list">
+            <label
+                class="flex gap-x-3 items-center cursor-pointer custom-label text-deep-dark text-xs hover:bg-deep-beige py-[10px] pl-3"
                 v-for="(airline, code) in airlines">
                 <span class="w-3 h-3 bg-white rounded-sm border-[1px] border-solid border-grey relative checkbox-custom"
                     :class="{ 'bg-bright-green border-bright-green checkbox-custom-checked': airlineFilter.includes(code.toString()) }"></span>
                 <input type="checkbox" class="hidden" v-model="airlineFilter" :value="code">
                 {{ airline }}
+            </label>
+        </div>
+        <div v-else>
+            <label
+                class="flex gap-x-3 items-center cursor-pointer custom-label text-deep-dark text-xs pl-3 py-[10px] hover:bg-deep-beige"
+                v-for="option in optionsArr">
+                <span class="w-3 h-3 bg-white rounded-sm border-[1px] border-solid border-grey relative checkbox-custom"
+                    :class="{ 'bg-bright-green border-bright-green checkbox-custom-checked': optionsFilter.includes(option.value) }"></span>
+                <input type="checkbox" class="hidden" v-model="optionsFilter" :value="option.value">
+                {{ option.name }}
             </label>
         </div>
     </div>
@@ -83,11 +128,11 @@ watch(airlineFilter, () => {
     left: 1px;
 }
 
-.airline-list::-webkit-scrollbar {
-  width: 2px;
+.filter-option-list::-webkit-scrollbar {
+    width: 2px;
 }
 
-.airline-list::-webkit-scrollbar-thumb {
-  background: #e1e1e1;
-} 
+.filter-option-list::-webkit-scrollbar-thumb {
+    background: #e1e1e1;
+}
 </style>
